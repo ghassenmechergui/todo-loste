@@ -48,13 +48,11 @@ function Todo({ todo, choitsirTodo, active, openModalDlete, openModalUpdate }) {
           className="icon"
           onClick={() => {
             openModalUpdate(todo);
-            checkTodo(todo.id);
           }}
         />
         <DeleteIcon
           className="icon"
           onClick={() => {
-            checkTodo(todo.id);
             openModalDlete(todo);
           }}
         />

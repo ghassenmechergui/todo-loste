@@ -53,6 +53,7 @@ export default function Profil() {
     newtodo.unshift({
       title: input,
       id: todos[0].id + 1 || 1,
+      plus: "",
     });
     localStorage.setItem("todo", JSON.stringify(newtodo));
     settodos(newtodo);

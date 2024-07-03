@@ -1,10 +1,16 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { todosContext } from "../context/todoContext";
 export default function Update({ style, annuler, todo, active, choitsirTodo }) {
-  const [input1, setinput1] = useState(todo.title);
+  const [input1, setinput1] = useState(todo.title || "");
   const [input2, setinput2] = useState(todo.plus || "");
+  console.log(1);
   const { settodos } = useContext(todosContext);
-  console.log(todo.title);
+
+  useEffect(() => {
+    setinput1(todo.title || "");
+    setinput2(todo.plus || "");
+  }, [todo]);
+
   function updateTodo(id) {
     let newtodo = JSON.parse(localStorage.getItem("todo")).map((e) => {
       if (e.id == id) {
@@ -27,14 +33,14 @@ export default function Update({ style, annuler, todo, active, choitsirTodo }) {
           <div>
             <input
               type="text"
-              value={todo.title}
+              value={input1}
               onChange={(e) => {
                 setinput1(e.target.value);
               }}
             />
             <input
               type="text"
-              value={todo.plus}
+              value={input2}
               placeholder="information"
               onChange={(e) => {
                 setinput2(e.target.value);
