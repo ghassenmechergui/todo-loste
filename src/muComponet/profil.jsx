@@ -1,6 +1,7 @@
 import "../mystyle/Profil.css";
 import { useState, useContext } from "react";
 import { todosContext } from "../context/todoContext";
+import { Open } from "../context/snakeBarcontext";
 import Delete from "./Delete";
 import Todo from "./Todo";
 import Update from "./Update";
@@ -13,7 +14,7 @@ export default function Profil() {
     );
   }
   const { todos, settodos } = useContext(todosContext);
-
+  const { showAlerte } = useContext(Open);
   const [active, setactive] = useState({
     b1: "active",
     b2: "",
@@ -80,6 +81,7 @@ export default function Profil() {
     setstyle({
       display: "none",
     });
+    showAlerte("delete succes");
   }
   function choitsirTodo(choit) {
     let newtodo = JSON.parse(localStorage.getItem("todo")).filter((e) => {
