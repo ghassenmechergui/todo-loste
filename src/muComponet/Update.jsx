@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { todosContext } from "../context/todoContext";
-import { Open } from "../context/snakeBarcontext";
+import { useOpen } from "../context/snakeBarcontext";
 export default function Update({ style, annuler, todo, active, choitsirTodo }) {
   const [input1, setinput1] = useState(todo.title || "");
   const [input2, setinput2] = useState(todo.plus || "");
   console.log(1);
   const { settodos } = useContext(todosContext);
-  const { showAlerte } = useContext(Open);
+  const { showAlerte } = useOpen();
   useEffect(() => {
     setinput1(todo.title || "");
     setinput2(todo.plus || "");
