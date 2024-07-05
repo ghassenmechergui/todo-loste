@@ -4,12 +4,13 @@
     box-sizing: border-box;
 }
 .card{
-    background-color: white;
+    background-color: #586863;
     width: 500px;
     min-height: 500px;
     padding: 10px;
     position: relative;
     padding-bottom: 60px;
+    border-radius: 25px;
 }
 .header{
     color: black;
@@ -33,11 +34,13 @@ hr{
     background-color: #e6b0b0;
 }
 .todo{
-    background-color: #000053;
+    background-color: #025241;
+    color: black;
     display: flex;
     padding: 20px;
     margin: 0;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 .todo .content{
     width: 50%;
@@ -84,6 +87,7 @@ hr{
     left: 0;
     bottom: 0;
     padding: 10px;
+    width: 100%;
 }
 .buttonFooter{
     background-color: red;
@@ -134,4 +138,29 @@ input{
 .update input{
     margin: 5px;
     color: black;
+}
+@media (max-width: 600px){
+    .card{
+        width: 90vw;
+        color: white;
+        border-radius: 25px;
+     
+    }
+    #root{
+        padding: 0;
+    }
+    body{
+        background-color: #242424;
+    }
+    
+}
+@media ( max-width: 337px){
+    .card{
+        width: 100vw;
+    }
+}
+@media( max-width: 486px){
+    .footer input {
+        width: 60%;
+    }
 }
