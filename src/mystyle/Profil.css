@@ -208,5 +208,30 @@ input{
     body{
         align-items: start !important;
         margin-top: 10px !important;
+        padding: 0;
+        margin: 0;
+    }
+    #root{
+        width: 100%;
+        height: 100vh;
+    }
+    .card{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .todo{
+        display: grid;
+        grid-template-columns: 1fr 100px !important;
+        gap: 10px;
+
+    }
+    .icons{
+        width: fit-content;
+       
+    }
+    .content{
+       
+        overflow-x: hidden;
+        width: 100% !important;
     }
 }
