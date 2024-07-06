@@ -6,7 +6,8 @@
 .card{
     background-color: #586863;
     width: 500px;
-    min-height: 500px;
+    max-height: 650px;
+    min-height: 400px;
     padding: 10px;
     position: relative;
     padding-bottom: 60px;
@@ -46,6 +47,20 @@ hr{
     width: 50%;
     text-align: left;
     
+}
+.section{
+    max-height: 400px;
+    overflow-y: hidden;
+    margin-bottom: 32px;
+}
+.list{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    color: #242424;
+    font-weight: 600;
+    font-size: larger;
 }
 .icons{
     display: flex;
@@ -88,6 +103,7 @@ hr{
     bottom: 0;
     padding: 10px;
     width: 100%;
+    margin-top: 60px;
 }
 .buttonFooter{
     background-color: red;
@@ -163,4 +179,28 @@ input{
     .footer input {
         width: 60%;
     }
+}
+.counter{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+   bottom: 60px;
+    z-index: 9999;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.counter div {
+    border: #025241 solid 2px;
+    text-align: center;
+    margin-left: 10px;
+    width:  30px;
+    height: 30px;
+    font-weight: bold;
+    color: #025241;
+    cursor: pointer;
+    
+    border-radius: 5px;
+}
+.active-counter{
+    background-color: aqua;
 }

@@ -4,7 +4,7 @@ import { useOpen } from "../context/snakeBarcontext";
 export default function Update({ style, annuler, todo, active, choitsirTodo }) {
   const [input1, setinput1] = useState(todo.title || "");
   const [input2, setinput2] = useState(todo.plus || "");
-  console.log(1);
+
   const { settodos } = useContext(todosContext);
   const { showAlerte } = useOpen();
   useEffect(() => {

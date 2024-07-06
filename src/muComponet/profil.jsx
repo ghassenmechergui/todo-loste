@@ -5,6 +5,7 @@ import { useOpen } from "../context/snakeBarcontext";
 import Delete from "./Delete";
 import Todo from "./Todo";
 import Update from "./Update";
+
 export default function Profil() {
   const [input, setInput] = useState("");
   if (JSON.parse(localStorage.getItem("todo")) == undefined) {
@@ -20,7 +21,11 @@ export default function Profil() {
     b2: "",
     b3: "",
   });
-
+  const [activeCounter, setActiveCounter] = useState({
+    b1: "1",
+    b2: "",
+    b3: "",
+  });
   const [style, setstyle] = useState({
     display: "none",
   });
@@ -37,6 +42,7 @@ export default function Profil() {
       display: "none",
     });
   }
+  const [counter, setcounter] = useState(0);
   function openModalDlete(todo) {
     setTodo(todo);
     setstyle({
@@ -93,6 +99,10 @@ export default function Profil() {
           b2: "",
           b3: "",
         });
+        setcounter(0);
+        setActiveCounter({
+          b1: 1,
+        });
         return e;
       }
       if (choit == false) {
@@ -106,6 +116,10 @@ export default function Profil() {
             b1: "",
             b2: "",
             b3: "active",
+          });
+          setcounter(0);
+          setActiveCounter({
+            b1: 1,
           });
           return e;
         }
@@ -122,8 +136,16 @@ export default function Profil() {
             b2: "active",
             b3: "",
           });
+          setcounter(0);
+          setActiveCounter({
+            b1: 1,
+          });
           return e;
         } else {
+          setcounter(0);
+          setActiveCounter({
+            b1: 1,
+          });
           return;
         }
       }
@@ -131,6 +153,12 @@ export default function Profil() {
 
     settodos(newtodo);
   }
+
+  let myArray = [];
+  for (let index = 1; index <= Math.floor(todos.length / 4) + 1; index++) {
+    myArray.push(index);
+  }
+  console.log(myArray);
   return (
     <div className="card">
       <div className="header">todo</div>
@@ -162,7 +190,7 @@ export default function Profil() {
         </button>
       </div>
       <div className="section">
-        {todos.map((e) => {
+        {todos.slice(counter, counter + 4).map((e) => {
           return e.title != "" ? (
             <Todo
               key={e.id || 100}
@@ -174,6 +202,19 @@ export default function Profil() {
             />
           ) : (
             ""
+          );
+        })}
+      </div>
+      <div className="counter">
+        {myArray.map((e) => {
+          return (
+            <Counter
+              key={e}
+              value={e}
+              setcounter={setcounter}
+              activeCounter={activeCounter}
+              setActiveCounter={setActiveCounter}
+            />
           );
         })}
       </div>
@@ -204,6 +245,24 @@ export default function Profil() {
         choitsirTodo={choitsirTodo}
         active={active}
       />
+    </div>
+  );
+}
+
+function Counter({ value, setcounter, activeCounter, setActiveCounter }) {
+  return (
+    <div
+      className={activeCounter.b1 == value ? "active-counter" : ""}
+      onClick={() => {
+        console.log(value);
+        setActiveCounter({
+          b1: value,
+        });
+        console.log((value - 1) * 4);
+        setcounter((value - 1) * 4);
+      }}
+    >
+      {value}
     </div>
   );
 }
