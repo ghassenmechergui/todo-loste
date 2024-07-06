@@ -218,8 +218,9 @@ input{
     }
     .card{
         width: 100% !important;
-        height: 100% !important;
+        height: 100vh !important;
         border-radius: 0;
+        max-height: 90vh;
     }
     .todo{
         display: grid;
@@ -235,5 +236,11 @@ input{
        
         overflow-x: hidden;
         width: 100% !important;
+    }
+    .section{
+        margin-top: 100px;
+    }
+    .menu{
+        margin-top: 30px;
     }
 }
