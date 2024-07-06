@@ -6,8 +6,8 @@
 .card{
     background-color: #586863;
     width: 500px;
-    max-height: 650px;
-    min-height: 400px;
+    max-height: 550px;
+    min-height: 300px;
     padding: 10px;
     position: relative;
     padding-bottom: 60px;
@@ -207,9 +207,10 @@ input{
 @media (max-width : 499px){
     body{
         align-items: start !important;
-        margin-top: 10px !important;
         padding: 0;
         margin: 0;
+        background-color: #586863;
+        
     }
     #root{
         width: 100%;
