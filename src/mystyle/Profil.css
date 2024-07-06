@@ -204,3 +204,9 @@ input{
 .active-counter{
     background-color: aqua;
 }
+@media (max-width : 499px){
+    body{
+        align-items: start !important;
+        margin-top: 10px !important;
+    }
+}
