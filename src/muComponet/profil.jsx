@@ -1,10 +1,11 @@
 import "../mystyle/Profil.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useReducer } from "react";
 import { todosContext } from "../context/todoContext";
 import { useOpen } from "../context/snakeBarcontext";
 import Delete from "./Delete";
 import Todo from "./Todo";
 import Update from "./Update";
+import reduseTodos from "../redueser/reduesTodo";
 
 export default function Profil() {
   const [input, setInput] = useState("");
@@ -14,7 +15,15 @@ export default function Profil() {
       JSON.stringify([{ title: "", plus: "", isFund: false, id: 1 }])
     );
   }
-  const { todos, settodos } = useContext(todosContext);
+  const { todos1, settodos } = useContext(todosContext);
+
+  const [todos, dispach] = useReducer(
+    reduseTodos,
+    JSON.parse(localStorage.getItem("todo")) || [
+      { title: "", plus: "", isFund: "yes", id: 1 },
+    ]
+  );
+
   const { showAlerte } = useOpen();
   const [active, setactive] = useState({
     b1: "active",
@@ -43,6 +52,7 @@ export default function Profil() {
     });
   }
   const [counter, setcounter] = useState(0);
+
   function openModalDlete(todo) {
     setTodo(todo);
     setstyle({
@@ -56,32 +66,12 @@ export default function Profil() {
     });
   }
   function addTodo() {
-    let newtodo = todos;
-    newtodo.unshift({
-      title: input,
-      id: todos[0].id + 1 || 1,
-      plus: "",
-    });
-    localStorage.setItem("todo", JSON.stringify(newtodo));
-    settodos(newtodo);
+    dispach({ type: "added", payloud: { title: input } });
     setInput("");
     showAlerte("adding succes");
   }
   function deleteTodo() {
-    let newtodo = JSON.parse(localStorage.getItem("todo")).filter((e) => {
-      if (e.id == todo.id) {
-        return;
-      } else {
-        return e;
-      }
-    });
-    localStorage.setItem(
-      "todo",
-      newtodo != []
-        ? JSON.stringify(newtodo)
-        : JSON.stringify([{ title: "", plus: "", isFund: "yes", id: 1 }])
-    );
-    settodos(newtodo);
+    dispach({ type: " deleted ", payloud: { id: todo.id } });
     choitsirTodo(
       active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
     );
