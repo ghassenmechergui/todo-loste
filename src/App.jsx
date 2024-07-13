@@ -1,23 +1,17 @@
 import "./App.css";
 import Profil from "./muComponet/profil";
-import { todosContext } from "./context/todoContext";
-import { useState } from "react";
+import TodosProvider from "./context/todoContext";
 
 import OpenProvider from "./context/snakeBarcontext";
 
 function App() {
-  const [todos, settodos] = useState(
-    JSON.parse(localStorage.getItem("todo")) || [
-      { title: "", plus: "", isFund: "yes", id: 1 },
-    ]
-  );
   return (
     <>
-      <OpenProvider>
-        <todosContext.Provider value={{ todos, settodos }}>
+      <TodosProvider>
+        <OpenProvider>
           <Profil />
-        </todosContext.Provider>
-      </OpenProvider>
+        </OpenProvider>
+      </TodosProvider>
     </>
   );
 }

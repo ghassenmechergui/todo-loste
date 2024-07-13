@@ -9,7 +9,7 @@ export default function Delete({ style, deleteTodo, id, annuler }) {
           <div>
             <button
               onClick={() => {
-                deleteTodo(id);
+                deleteTodo();
               }}
             >
               {" "}

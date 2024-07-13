@@ -2,26 +2,16 @@ import CheckIcon from "@mui/icons-material/Check";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../mystyle/Profil.css";
-import { useContext } from "react";
+
 import { useOpen } from "../context/snakeBarcontext";
-import { todosContext } from "../context/todoContext";
+import { useTodos } from "../context/todoContext";
 
 function Todo({ todo, choitsirTodo, active, openModalDlete, openModalUpdate }) {
-  const { todos, settodos } = useContext(todosContext);
+  const { todos, dispach } = useTodos();
   const { showAlerte } = useOpen();
+
   function checkTodo(id) {
-    let newtodo = JSON.parse(localStorage.getItem("todo")).map((e) => {
-      if (e.id == id) {
-        return {
-          ...e,
-          isFund: !e.isFund,
-        };
-      } else {
-        return e;
-      }
-    });
-    localStorage.setItem("todo", JSON.stringify(newtodo));
-    settodos(newtodo);
+    dispach({ type: " checked ", payloud: { id: id } });
     choitsirTodo(
       active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
     );

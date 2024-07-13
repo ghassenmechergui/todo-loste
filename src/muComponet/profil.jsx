@@ -1,11 +1,10 @@
 import "../mystyle/Profil.css";
-import { useState, useContext, useReducer } from "react";
-import { todosContext } from "../context/todoContext";
+import { useState, useEffect } from "react";
+import { useTodos } from "../context/todoContext";
 import { useOpen } from "../context/snakeBarcontext";
 import Delete from "./Delete";
 import Todo from "./Todo";
 import Update from "./Update";
-import reduseTodos from "../redueser/reduesTodo";
 
 export default function Profil() {
   const [input, setInput] = useState("");
@@ -15,15 +14,8 @@ export default function Profil() {
       JSON.stringify([{ title: "", plus: "", isFund: false, id: 1 }])
     );
   }
-  const { todos1, settodos } = useContext(todosContext);
-
-  const [todos, dispach] = useReducer(
-    reduseTodos,
-    JSON.parse(localStorage.getItem("todo")) || [
-      { title: "", plus: "", isFund: "yes", id: 1 },
-    ]
-  );
-
+  const { todos, dispach } = useTodos();
+  const [newtodo, setNewtodo] = useState(todos);
   const { showAlerte } = useOpen();
   const [active, setactive] = useState({
     b1: "active",
@@ -67,11 +59,13 @@ export default function Profil() {
   }
   function addTodo() {
     dispach({ type: "added", payloud: { title: input } });
+
     setInput("");
     showAlerte("adding succes");
   }
   function deleteTodo() {
     dispach({ type: " deleted ", payloud: { id: todo.id } });
+
     choitsirTodo(
       active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
     );
@@ -80,9 +74,18 @@ export default function Profil() {
     });
     showAlerte("delete succes");
   }
+
+  function updateTodo(input1, input2) {
+    dispach({ type: " update ", payloud: { input1, input2, id: todo.id } });
+
+    choitsirTodo(
+      active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
+    );
+    showAlerte("update succes");
+  }
+
   function choitsirTodo(choit) {
     let newtodo = JSON.parse(localStorage.getItem("todo")).filter((e) => {
-      console.log("rirender");
       if (choit == "tout") {
         setactive({
           b1: "active",
@@ -141,14 +144,21 @@ export default function Profil() {
       }
     });
 
-    settodos(newtodo);
+    setNewtodo(newtodo);
+    return newtodo;
   }
-
+  useEffect(() => {
+    setNewtodo(
+      choitsirTodo(
+        active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
+      )
+    );
+  }, [todos]);
   let myArray = [];
   for (let index = 1; index <= Math.floor(todos.length / 4) + 1; index++) {
     myArray.push(index);
   }
-  console.log(myArray);
+
   return (
     <div className="card">
       <div className="header">todo</div>
@@ -180,7 +190,7 @@ export default function Profil() {
         </button>
       </div>
       <div className="section">
-        {todos.slice(counter, counter + 4).map((e) => {
+        {newtodo.slice(counter, counter + 4).map((e) => {
           return e.title != "" ? (
             <Todo
               key={e.id || 100}
@@ -232,8 +242,7 @@ export default function Profil() {
         style={style2}
         annuler={annuler}
         todo={todo}
-        choitsirTodo={choitsirTodo}
-        active={active}
+        updateTodo={updateTodo}
       />
     </div>
   );
