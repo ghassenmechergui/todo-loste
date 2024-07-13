@@ -22,11 +22,7 @@ export default function Profil() {
     b2: "",
     b3: "",
   });
-  const [activeCounter, setActiveCounter] = useState({
-    b1: "1",
-    b2: "",
-    b3: "",
-  });
+
   const [style, setstyle] = useState({
     display: "none",
   });
@@ -92,11 +88,6 @@ export default function Profil() {
           b2: "",
           b3: "",
         });
-        setcounter(0);
-        setActiveCounter({
-          b1: 1,
-        });
-        return e;
       }
       if (choit == false) {
         setactive({
@@ -110,11 +101,6 @@ export default function Profil() {
             b2: "",
             b3: "active",
           });
-          setcounter(0);
-          setActiveCounter({
-            b1: 1,
-          });
-          return e;
         }
       }
       if (choit == true) {
@@ -129,27 +115,11 @@ export default function Profil() {
             b2: "active",
             b3: "",
           });
-          setcounter(0);
-          setActiveCounter({
-            b1: 1,
-          });
-          return e;
-        } else {
-          setcounter(0);
-          setActiveCounter({
-            b1: 1,
-          });
-          return;
         }
       }
     });
 
     dispach({ type: "choitsirTodo", payloud: { choit } });
-  }
-
-  let myArray = [];
-  for (let index = 1; index <= Math.floor(todos.length / 4) + 1; index++) {
-    myArray.push(index);
   }
 
   return (
@@ -183,7 +153,7 @@ export default function Profil() {
         </button>
       </div>
       <div className="section">
-        {todos.slice(counter, counter + 4).map((e) => {
+        {todos.map((e) => {
           return e.title != "" ? (
             <Todo
               key={e.id || 100}
@@ -198,19 +168,7 @@ export default function Profil() {
           );
         })}
       </div>
-      <div className="counter">
-        {myArray.map((e) => {
-          return (
-            <Counter
-              key={e}
-              value={e}
-              setcounter={setcounter}
-              activeCounter={activeCounter}
-              setActiveCounter={setActiveCounter}
-            />
-          );
-        })}
-      </div>
+
       <div className="footer">
         <button onClick={addTodo} className=" buttonFooter">
           {" "}
@@ -223,6 +181,7 @@ export default function Profil() {
           onChange={(e) => {
             setInput(e.target.value);
           }}
+          maxLength={20}
         />
       </div>
       <Delete

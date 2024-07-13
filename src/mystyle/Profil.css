@@ -6,7 +6,7 @@
 .card{
     background-color: #586863;
     width: 500px;
-    max-height: 550px;
+    max-height: 570px;
     min-height: 300px;
     padding: 10px;
     position: relative;
@@ -49,9 +49,10 @@ hr{
     
 }
 .section{
-    max-height: 400px;
-    overflow-y: hidden;
-    margin-bottom: 32px;
+    max-height:360px;;
+    overflow-x: hidden;
+    overflow-y: scroll;
+   
 }
 .list{
     width: 100%;
@@ -103,7 +104,7 @@ hr{
     bottom: 0;
     padding: 10px;
     width: 100%;
-    margin-top: 60px;
+    
 }
 .buttonFooter{
     background-color: red;
@@ -155,6 +156,7 @@ input{
     margin: 5px;
     color: black;
 }
+
 @media (max-width: 600px){
     .card{
         width: 90vw;
@@ -180,30 +182,8 @@ input{
         width: 60%;
     }
 }
-.counter{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-   bottom: 60px;
-    z-index: 9999;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.counter div {
-    border: #025241 solid 2px;
-    text-align: center;
-    margin-left: 10px;
-    width:  30px;
-    height: 30px;
-    font-weight: bold;
-    color: #025241;
-    cursor: pointer;
-    
-    border-radius: 5px;
-}
-.active-counter{
-    background-color: aqua;
-}
+
+
 @media (max-width : 499px){
     body{
         align-items: start !important;
@@ -220,7 +200,10 @@ input{
         width: 100% !important;
         height: 100vh !important;
         border-radius: 0;
-        max-height: 90vh;
+        max-height: 100vh;
+    }
+    .section{
+        max-height: 440px;
     }
     .todo{
         display: grid;
@@ -237,10 +220,11 @@ input{
         overflow-x: hidden;
         width: 100% !important;
     }
-    .section{
-        margin-top: 50px;
+    
+    .menu {
+        margin-top: -5px;
     }
-    .menu{
-        margin-top: 30px;
-    }
+}
+.section {
+    scrollbar-width: none;
 }
