@@ -15,7 +15,7 @@ export default function Profil() {
     );
   }
   const { todos, dispach } = useTodos();
-  const [newtodo, setNewtodo] = useState(todos);
+
   const { showAlerte } = useOpen();
   const [active, setactive] = useState({
     b1: "active",
@@ -144,16 +144,9 @@ export default function Profil() {
       }
     });
 
-    setNewtodo(newtodo);
-    return newtodo;
+    dispach({ type: "choitsirTodo", payloud: { choit } });
   }
-  useEffect(() => {
-    setNewtodo(
-      choitsirTodo(
-        active.b1 == "active" ? "tout" : active.b2 == "active" ? true : false
-      )
-    );
-  }, [todos]);
+
   let myArray = [];
   for (let index = 1; index <= Math.floor(todos.length / 4) + 1; index++) {
     myArray.push(index);
@@ -190,7 +183,7 @@ export default function Profil() {
         </button>
       </div>
       <div className="section">
-        {newtodo.slice(counter, counter + 4).map((e) => {
+        {todos.slice(counter, counter + 4).map((e) => {
           return e.title != "" ? (
             <Todo
               key={e.id || 100}

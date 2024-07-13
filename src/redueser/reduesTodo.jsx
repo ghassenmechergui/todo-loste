@@ -43,7 +43,7 @@ export default function reduseTodos(curenteTodos, action) {
       return update;
 
     case " checked ":
-      const checked = curenteTodos.map((e) => {
+      const checked = JSON.parse(localStorage.getItem("todo")).map((e) => {
         if (e.id == action.payloud.id) {
           const updatetodo = {
             ...e,
@@ -58,7 +58,29 @@ export default function reduseTodos(curenteTodos, action) {
       return checked;
 
     case "choitsirTodo":
-      return curenteTodos;
+      console.log(action.payloud.choit);
+      const choit = action.payloud.choit;
+      let choitsirTodo = JSON.parse(localStorage.getItem("todo")).filter(
+        (e) => {
+          if (choit == "tout") {
+            return e;
+          }
+          if (choit == false) {
+            if (e.isFund == undefined || e.isFund == false) {
+              return e;
+            }
+          }
+          if (choit == true) {
+            if (e.isFund == true) {
+              return e;
+            } else {
+              return;
+            }
+          }
+        }
+      );
+
+      return choitsirTodo;
 
     case "red":
       return action.payloud.todos;
